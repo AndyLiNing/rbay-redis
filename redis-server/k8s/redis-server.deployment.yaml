@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-server-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+        component: redis-server
+  template:
+    metadata:
+      name: redis-server
+      labels:
+          component: redis-server
+    spec:
+        # volumes section requests k8s to allocate the hard drive
+        volumes:
+          - name: redis-storage
+            persistentVolumeClaim:
+              claimName: redis-persistent-volume-claim
+        containers:
+          - name: redis
+            image: redis
+            ports:
+               - containerPort: 6379
+             # volumeMounts tells container which volume to use
+            volumeMounts:
+                # should be the same name as in the section 'volumes'
+              - name: redis-storage
+                # the path where redis store the data in container
+                mountPath: /data
+#            env:
+#              - name: REDIS_PW
+#                valueFrom:
+#                  secretKeyRef:
+#                    # name of the secret
+#                    name: redis_secret
+#                    # one of the key which stores in secret
+#                    # kubectl create secret generic redis_secret --from-literal REDIS_PW=myRedisPassword
+#                    key: REDIS_PW
+
+
+

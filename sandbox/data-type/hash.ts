@@ -6,6 +6,15 @@ import type { RedisClientType } from '@node-redis/client';
 // 1, The record has many attributes
 // 2, Need to sort record by different criteria
 // 3,
+
+
+
+// Notes:
+// client.hGetAll returns {} when not found
+
+
+
+
 export const hash = async (client: RedisClientType) => {
   const key = 'car';
   const response = await client.hSet(key, {

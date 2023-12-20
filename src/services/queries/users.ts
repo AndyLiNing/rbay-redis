@@ -14,8 +14,14 @@ import { genId } from "$services/utils";
 // Username info is stored in a Set
 // As the test the uniqueness of username
 
+// Note3:
+// Use sorted set to store the username + userId combination
+// In order to user password by username(username and password are stored in a Hash structure )
 
-export const getUserByUsername = async (username: string) => {};
+export const getUserByUsername = async (username: string) => {
+
+
+};
 
 export const getUserById = async (id: string) => {
   const user = await client.hGetAll(userKey(id));

@@ -1,3 +1,11 @@
+
+// Note1
+// Like system data stucture
+// users:likes#userId = a set of item ids [x, y, z...]
+
+
+
+
 export const userLikesItem = async (itemId: string, userId: string) => {};
 
 export const likedItems = async (userId: string) => {};

@@ -11,9 +11,9 @@ import type { Session } from '$services/types';
 // }
 
 export const getSession = async (id: string) => {
-  const session = await client.hGetAll( sessionKey(id))
-
-  if(!session) {
+  const session = await client.hGetAll(sessionKey(id))
+  const exist = Object.keys(session).length > 0;
+  if(!exist) {
     throw new Error('No session exist for this user')
   }
 
